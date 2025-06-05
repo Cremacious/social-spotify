@@ -8,15 +8,27 @@ import songRoutes from './routes/song.routes.js';
 import albumRoutes from './routes/album.routes.js';
 import statsRoutes from './routes/stats.routes.js';
 import { connectDB } from './lib/db.js';
+import fileupload from 'express-fileupload';
+import path from 'path';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-
 app.use(clerkMiddleware());
+app.use(
+  fileupload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, 'tmp'),
+    createParentPath: true,
+    limits: {
+      fileSize: 10 * 1024 * 1024,
+    },
+  })
+);
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
