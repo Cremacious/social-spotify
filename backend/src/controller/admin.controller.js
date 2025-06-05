@@ -66,3 +66,12 @@ export const deleteSong = async (req, res, next) => {
     next(error);
   }
 };
+
+export const createAlbum = async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    console.log('Error in deleting song');
+    next(error);
+  }
+};
