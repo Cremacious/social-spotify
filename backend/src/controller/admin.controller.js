@@ -54,6 +54,9 @@ export const deleteSong = async (req, res, next) => {
   try {
     const { id } = req.params;
     const song = await Song.findById(id);
+    if (!song) {
+      return res.status(404).json({ message: 'Song not found' });
+    }
     if (song.albumId) {
       await Album.findByIdAndUpdate(song.albumId, {
         $pull: { songs: song._id },
@@ -69,9 +72,37 @@ export const deleteSong = async (req, res, next) => {
 
 export const createAlbum = async (req, res, next) => {
   try {
-    
+    const { title, artist, releaseYear } = req.body;
+    const { imageFile } = req.files;
+    const imageUrl = await uploadToCloudinary(imageFile);
+    const album = new Album({
+      title,
+      artist,
+      imageUrl,
+      releaseYear,
+    });
+    await album.save();
+    res.status(201).json(album);
   } catch (error) {
-    console.log('Error in deleting song');
+    console.log('Error in creating album');
     next(error);
   }
+};
+
+export const deleteAlbum = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Song.deleteMany({ albumId: id });
+    await Album.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Album deleted successfully' });
+  } catch (error) {
+    console.log('Error in deleting album');
+    next(error);
+  }
+};
+
+export const checkAdmin = async (req, res, next) => {
+  res.status(200).json({
+    admin: true,
+  });
 };
