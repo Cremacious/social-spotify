@@ -10,12 +10,20 @@ import statsRoutes from './routes/stats.routes.js';
 import { connectDB } from './lib/db.js';
 import fileupload from 'express-fileupload';
 import path from 'path';
+import cors from 'cors';
 
 dotenv.config();
 
 const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(clerkMiddleware());
@@ -38,14 +46,12 @@ app.use('/api/albums', albumRoutes);
 app.use('/api/stats', statsRoutes);
 
 app.use((err, req, res, next) => {
-  res
-    .status(500)
-    .json({
-      message:
-        process.env.NODE_ENV === 'production'
-          ? 'Internal service error'
-          : err.message,
-    });
+  res.status(500).json({
+    message:
+      process.env.NODE_ENV === 'production'
+        ? 'Internal service error'
+        : err.message,
+  });
 });
 
 app.listen(PORT, () => {
