@@ -1,28 +1,23 @@
-import { Button } from './components/ui/button';
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from '@clerk/clerk-react';
+import { Routes, Route } from 'react-router';
+import HomePage from './pages/home/Homepage';
+import AuthCallbackPage from './pages/auth-callback/AuthCallbackPage';
+import { axiosInstance } from './lib/axios';
 
 function App() {
+  const fetchSomeData = async () => {
+    await axiosInstance.get('/users', {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+  };
   return (
-    <div className="bg-gray-800 text-white p-4">
-      App
-      <div>
-        <Button>Button</Button>
-      </div>
-      <div>
-        {' '}
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth-callback" element={<AuthCallbackPage />} />
+      </Routes>
+    </>
   );
 }
 
