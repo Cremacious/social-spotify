@@ -40,9 +40,8 @@ export const getFeaturedSongs = async (req, res, next) => {
         },
       },
     ]);
-    res.status(200).json(songs);
+    res.json(songs);
   } catch (error) {
-    console.log('Error in fetching featured songs');
     next(error);
   }
 };
