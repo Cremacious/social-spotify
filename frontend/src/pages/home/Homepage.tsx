@@ -3,7 +3,7 @@ import { useMusicStore } from '@/stores/useMusicStore';
 import { useEffect } from 'react';
 import FeaturedSection from './components/FeaturedSection';
 import { ScrollArea } from '@/components/ui/scroll-area';
-// import SectionGrid from './components/SectionGrid';
+import SectionGrid from './components/SectionGrid';
 // import { usePlayerStore } from '@/stores/usePlayerStore';
 
 const HomePage = () => {
@@ -11,10 +11,10 @@ const HomePage = () => {
     fetchFeaturedSongs,
     fetchMadeForYouSongs,
     fetchTrendingSongs,
-    // isLoading,
-    // madeForYouSongs,
-    // featuredSongs,
-    // trendingSongs,
+    isLoading,
+    madeForYouSongs,
+    featuredSongs,
+    trendingSongs,
   } = useMusicStore();
 
   // const { initializeQueue } = usePlayerStore();
@@ -47,7 +47,7 @@ const HomePage = () => {
           <FeaturedSection />
 
           <div className="space-y-8">
-            {/* <SectionGrid
+            <SectionGrid
               title="Made For You"
               songs={madeForYouSongs}
               isLoading={isLoading}
@@ -56,7 +56,7 @@ const HomePage = () => {
               title="Trending"
               songs={trendingSongs}
               isLoading={isLoading}
-            /> */}
+            />
           </div>
         </div>
       </ScrollArea>
