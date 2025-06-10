@@ -4,7 +4,7 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
 import { Outlet } from 'react-router';
-// import FriendsActivity from './components/FriendsActivity';
+import FriendsActivity from './components/FriendsActivity';
 // import AudioPlayer from './components/AudioPlayer';
 // import { PlaybackControls } from './components/PlaybackControls';
 import { useEffect, useState } from 'react';
@@ -46,15 +46,14 @@ const MainLayout = () => {
         {!isMobile && (
           <>
             <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
-            {/* right sidebar */}
             <ResizablePanel
               defaultSize={20}
               minSize={0}
               maxSize={25}
               collapsedSize={0}
             >
-              Right sidebar
-              {/* <FriendsActivity /> */}
+ 
+              <FriendsActivity />
             </ResizablePanel>
           </>
         )}
