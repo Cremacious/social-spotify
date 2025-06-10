@@ -4,7 +4,6 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
 import { Outlet } from 'react-router';
-// import LeftSidebar from './components/LeftSidebar';
 // import FriendsActivity from './components/FriendsActivity';
 // import AudioPlayer from './components/AudioPlayer';
 // import { PlaybackControls } from './components/PlaybackControls';
