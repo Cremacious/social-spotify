@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import {initializeServer} from './lib/socket.js'
 import { clerkMiddleware } from '@clerk/express';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.routes.js';
