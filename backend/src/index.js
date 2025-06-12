@@ -11,12 +11,16 @@ import { connectDB } from './lib/db.js';
 import fileupload from 'express-fileupload';
 import path from 'path';
 import cors from 'cors';
+import { createServer } from 'http';
 
 dotenv.config();
 
 const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const httpServer = createServer()
+initializeServer(httpServer)
 
 app.use(
   cors({
@@ -54,7 +58,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log('Server is running on port', PORT);
   connectDB();
 });
+
+
